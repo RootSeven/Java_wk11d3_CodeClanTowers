@@ -5,10 +5,13 @@ public class Hotel {
 
     private HashMap<BedRoom, Boolean> bedRoomsInHotel;
     private HashMap<ConferenceRoom, Boolean> conferenceRoomsInHotel;
+    private HashMap<String, DiningRoom> diningRoomsInHotel;
+    private Booking booking;
 
     public Hotel() {
         this.bedRoomsInHotel = new HashMap<BedRoom, Boolean> ();
         this.conferenceRoomsInHotel = new HashMap<ConferenceRoom, Boolean>();
+        this.diningRoomsInHotel = new HashMap<String, DiningRoom>();
     }
 
     public HashMap<BedRoom, Boolean> getBedRoomsInHotel() {
@@ -50,6 +53,16 @@ public class Hotel {
         if (bedRoom.getGuestsInRoom().size() == 0 ){
             this.bedRoomsInHotel.put(bedRoom, false);
         }
+    }
+
+
+    public Booking bookBedRoom(BedRoom bedRoom, int nightsStaying) {
+        booking = new Booking(bedRoom, nightsStaying);
+        return booking;
+    }
+
+    public int totalBill(Booking booking) {
+        return booking.getNightsBooked() * booking.getBedroom().getNightlyRate();
     }
 }
 
